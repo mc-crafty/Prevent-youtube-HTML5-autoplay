@@ -11,13 +11,20 @@
 // ==/UserScript==
 
 function onLoad() {
-	setTimeout(function(){
+	setTimeout(function() {
     	video = document.getElementsByTagName('video')[0];
-		if (video) {
-		    video.pause();
-		    video.currentTime = 0;
-		}
-	}, 300);
+    	if (video) {
+        	video.pause();
+        	if ( video.currentTime != 0 ) {
+            	video.pause();
+        	} else {
+        	    onLoad();
+        	}
+            video.currentTime = 0; 
+    	} else {
+    	    onLoad();
+    	}
+	}, 10);
 }
 
 window.addEventListener('load', onLoad, false);
